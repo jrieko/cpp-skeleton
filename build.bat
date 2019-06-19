@@ -2,6 +2,10 @@
 @REM
 @REM Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
 @REM or copy at http://opensource.org/licenses/MIT)
+
+git submodule init
+git submodule update
+
 mkdir build
 cd build
 

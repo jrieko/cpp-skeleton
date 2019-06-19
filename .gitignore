@@ -1,25 +1,50 @@
-Debug
-Release
-build
+build/
+cpplint/
+googletest/
 
-CppSkeleton
-TestSkeleton
-
-CMakeFiles
+## CMake ##
 CMakeCache.txt
-*.cmake
-*.dir
-Testing/
-
+CMakeFiles
+CMakeScripts
+Testing
 Makefile
-*.sln
-*.ncb
-*.suo
-*.user
-*.vc*
-*sdf
-*ipch
-*~
-doc
-core
-.settings/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+
+## C++ ##
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+

@@ -4,7 +4,7 @@
 # or copy at http://opensource.org/licenses/MIT)
 
 cmake_minimum_required(VERSION 2.8.12) # first version with add_compile_options()
-project(CppSkeleton CXX)
+project(main CXX)
 
 # Verbose Makefile
 #set (CMAKE_VERBOSE_MAKEFILE ON)
@@ -76,37 +76,16 @@ endif (MSVC)
 
 # List all sources/headers files
 set(source_files
- ${CMAKE_SOURCE_DIR}/src/Main.cpp
- ${CMAKE_SOURCE_DIR}/src/Utils/DateTime.cpp src/Utils/DateTime.h
- ${CMAKE_SOURCE_DIR}/src/Utils/Measure.cpp src/Utils/Measure.h
- ${CMAKE_SOURCE_DIR}/src/Utils/Random.cpp src/Utils/Random.h
- ${CMAKE_SOURCE_DIR}/src/Utils/Time.cpp src/Utils/Time.h
- ${CMAKE_SOURCE_DIR}/src/Utils/Utils.h
+ ${CMAKE_SOURCE_DIR}/src/main.cpp
 )
 source_group(src     FILES ${source_files})
-
-# List script files
-set(script_files
- ${CMAKE_SOURCE_DIR}/.travis.yml
- ${CMAKE_SOURCE_DIR}/appveyor.yml
- ${CMAKE_SOURCE_DIR}/build.bat
- ${CMAKE_SOURCE_DIR}/build.sh
-)
-source_group(scripts FILES ${script_files})
-
-# List doc files
-set(doc_files
- ${CMAKE_SOURCE_DIR}/README.md
- ${CMAKE_SOURCE_DIR}/LICENSE.txt
-)
-source_group(doc     FILES ${doc_files})
 
 # All includes are relative to the "src" directory
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
 # add the application executable
-add_executable(CppSkeleton ${source_files} ${doc_files} ${script_files})
-target_link_libraries(CppSkeleton ${SYSTEM_LIBRARIES})
+add_executable(main ${source_files})
+target_link_libraries(main ${SYSTEM_LIBRARIES})
 
 
 # Optional additional targets:
@@ -178,7 +157,7 @@ if (CPPSKELETON_RUN_CLOC)
         # add a cloc target to the "all" target
         add_custom_target(cloc
             ALL
-            COMMAND "${CLOC_EXECUTABLE}" ${source_files} ${script_files} --quiet
+            COMMAND "${CLOC_EXECUTABLE}" ${source_files} --quiet
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         )
     else (CLOC_EXECUTABLE)
@@ -191,18 +170,17 @@ endif (CPPSKELETON_RUN_CLOC)
 # Run googletest unit-test suite.
 if (CPPSKELETON_RUN_TESTS)
     # add the test executable
-    add_executable(TestSkeleton
-        src/Utils/Time.cpp src/Utils/Time.h src/Utils/Time_test.cpp)
-    target_link_libraries(TestSkeleton gtest_main ${SYSTEM_LIBRARIES})
+    add_executable(main_test test/)
+    target_link_libraries(main_test gtest_main ${SYSTEM_LIBRARIES})
 
     # add a "test" target:
     enable_testing()
 
     # does the application runs
-    add_test(ApplicationRuns CppSkeleton)
+    add_test(ApplicationRuns main)
 
     # does the tests pass
-    add_test(TestsPass TestSkeleton)
+    add_test(TestsPass main_test)
 else (CPPSKELETON_RUN_TESTS)
     message(STATUS "CPPSKELETON_RUN_TESTS          OFF")
 endif (CPPSKELETON_RUN_TESTS)

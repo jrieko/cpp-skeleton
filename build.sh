@@ -1,9 +1,8 @@
-# Copyright (c) 2013-2018 Sébastien Rombauts (sebastien.rombauts@gmail.com)
-#
-# Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
-# or copy at http://opensource.org/licenses/MIT)
-mkdir -p build
-cd build
+git submodule init || exit $?
+git submodule update || exit $?
+
+mkdir -p build || exit $?
+cd build || exit $?
 
 # Detect if clang is installed, then use it by default
 if command -v clang >/dev/null 2>&1 ; then
