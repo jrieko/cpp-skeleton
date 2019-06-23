@@ -19,4 +19,5 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 
 # Run unit-tests (ie 'make test')
-ctest --output-on-failure
+export GTEST_COLOR=1
+ctest -V
